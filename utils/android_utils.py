@@ -10,8 +10,7 @@ def get_udid() -> str:
     command = "adb devices"
     command_result = (
         subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
-        .stdout.decode()
-        .strip()
+        .stdout.decode().strip()
     )
     if "device" in command_result:
         return command_result.split("\n")[1].split("\t")[0]
