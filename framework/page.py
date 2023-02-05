@@ -8,9 +8,9 @@ class Page:
         """
         Page constructor.
 
-        :param driver: WebDriver instance
+        :param driver: Web_driver instance
         """
-        self.driver = driver
+        self.__driver = driver
 
     def __find_element(self, locator: str) -> WebElement:
         """
@@ -19,7 +19,7 @@ class Page:
         :param locator: the locator string
         :return: the WebElement instance
         """
-        return self.driver.find_element_by_xpath(locator)
+        return self.__driver.find_element_by_xpath(locator)
 
     def _element_is_visible(self, locator) -> bool:
         """
@@ -52,11 +52,11 @@ class Page:
 
     def _check_activity(self) -> str:
         """
-        Get the current activity of the driver.
+        Get the current activity of the _driver.
 
         :return: the current activity string
         """
-        return self.driver.current_activity
+        return self.__driver.current_activity
 
     def _check_element_enable(self, locator) -> bool:
         """
