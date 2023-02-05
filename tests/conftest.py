@@ -5,7 +5,7 @@ import pytest
 from appium import webdriver
 from appium.webdriver.webdriver import WebDriver
 
-from framework import LoginPage
+from framework.login_page import LoginPage
 from framework.sidebar import Sidebar
 from tests.elements_path.dashboard_elements_path import dashboard_elements
 from tests.elements_path.login_page_elements_path import login_elements
