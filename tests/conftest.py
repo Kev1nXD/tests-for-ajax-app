@@ -1,4 +1,5 @@
 import logging
+from logging import Logger
 import subprocess
 
 import pytest
@@ -14,7 +15,7 @@ from utils.android_utils import android_get_desired_capabilities
 
 
 @pytest.fixture(scope="session")
-def setup_logging_fixture():
+def setup_logging_fixture() -> Logger:
     """
     A fixture to set up the 'logger' for the test module
     """
@@ -46,7 +47,10 @@ q    This fixture is used to run the 'Appium server' at the start of the test se
 
 
 @pytest.fixture(scope='function')
-def sidebar_fixture(driver_fixture: WebDriver, setup_logging_fixture):
+def sidebar_fixture(
+        driver_fixture: WebDriver,
+        setup_logging_fixture: Logger
+) -> Sidebar:
     """
     This fixture provides an instance of the 'Sidebar' class.
     It accepts a WebDriver instance as a parameter and returns
@@ -77,7 +81,10 @@ def sidebar_fixture(driver_fixture: WebDriver, setup_logging_fixture):
 
 
 @pytest.fixture(scope='function')
-def user_login_fixture(driver_fixture: WebDriver, setup_logging_fixture):
+def user_login_fixture(
+        driver_fixture: WebDriver,
+        setup_logging_fixture: Logger
+) -> LoginPage:
     """
     This fixture provides an instance of the 'LoginPage' class.
     It accepts a WebDriver instance as a parameter and returns a
@@ -108,7 +115,11 @@ counter = 0
 
 
 @pytest.fixture(scope="function", autouse=True)
-def reset_driver(request, driver_fixture: WebDriver, setup_logging_fixture):
+def reset_driver(
+        request,
+        driver_fixture: WebDriver,
+        setup_logging_fixture: Logger
+) -> None:
     """
     This fixture resets the driver after each
     test function is executed except last.
@@ -132,7 +143,10 @@ def reset_driver(request, driver_fixture: WebDriver, setup_logging_fixture):
 
 
 @pytest.fixture(scope="session")
-def driver_fixture(run_appium_server, setup_logging_fixture):
+def driver_fixture(
+        run_appium_server,
+        setup_logging_fixture: Logger
+) -> WebDriver:
     """
     This fixture creates an instance of the Android WebDriver and
     returns it. It makes use of the run_appium_server fixture to run

@@ -3,9 +3,13 @@ import subprocess
 
 def get_udid() -> str:
     """
-        Finds udid of connected device
+    Finds udid of connected device from console.
 
-        :return: device's udid
+    example:
+    'List of devices attached
+    2dcd6117        device' --> '2dcd6117'
+
+    :return: device's udid
     """
     command = "adb devices"
     command_result = (
@@ -13,11 +17,13 @@ def get_udid() -> str:
         .stdout.decode().strip()
     )
     if "device" in command_result:
-        return command_result.split("\n")[1].split("\t")[0]
+        row_with_udid = command_result.split("\n")[1]
+        udid = row_with_udid.split("\t")[0]
+        return udid
     return "device not found"
 
 
-def android_get_desired_capabilities():
+def android_get_desired_capabilities() -> dict:
     return {
         "autoGrantPermissions": True,
         "automationName": "uiautomator2",

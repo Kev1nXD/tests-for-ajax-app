@@ -1,8 +1,9 @@
-from selenium.webdriver.support import expected_conditions as EC
+from logging import Logger
+
 import pytest
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from tests.elements_path.dashboard_elements_path import dashboard_elements
+
+from framework.sidebar import Sidebar
+from framework.login_page import LoginPage
 
 
 @pytest.mark.parametrize(
@@ -11,19 +12,20 @@ from tests.elements_path.dashboard_elements_path import dashboard_elements
         (
             "invalid_username",
             "invalid_password",
-            ".auth.presentation.login.LoginActivity",
+            False,
         ),
         (
             "qa.ajax.app.automation@gmail.com",
             "qa_automation_password",
-            ".ui.activity.DashboardActivity",
+            True,
         ),
     ],
     ids=["invalid credentials", "valid credentials"],
 )
 def test_user_login(
-        user_login_fixture,
-        setup_logging_fixture,
+        user_login_fixture: LoginPage,
+        sidebar_fixture: Sidebar,
+        setup_logging_fixture: Logger,
         username: str,
         password: str,
         expected_result: str,
@@ -40,6 +42,7 @@ def test_user_login(
     logger = setup_logging_fixture
     logger.info(f"{request.node.name} start test login functionality")
     login_page = user_login_fixture
+    sidebar = sidebar_fixture
     login_page.click_entrance_button()
     logger.info("test_user_login clicked entrance button")
     login_page.enter_username(username)
@@ -48,18 +51,8 @@ def test_user_login(
     logger.info("test_user_login filled password form")
     login_page.click_submit_button()
     logger.info("test_user_login clicked submit button")
-    if request.node.name == "test_user_login[valid credentials]":
-        wait = WebDriverWait(login_page.driver, 5)
-        wait.until(EC.visibility_of_element_located(
-            (By.XPATH, dashboard_elements()["sidebar"])
-        ))
-    else:
-        wait = WebDriverWait(login_page.driver, 5)
-        wait.until(EC.invisibility_of_element_located(
-            (By.XPATH, dashboard_elements()["sidebar"])
-        ))
 
-    actual_result = login_page.check_activity()
+    actual_result = sidebar.sidebar_is_visible()
     assert (
         actual_result == expected_result
     ), f"Expected {expected_result} but got {actual_result}"

@@ -31,7 +31,7 @@ class LoginPage(Page):
         """
         Click the entrance button to login page.
         """
-        self.click_element(locator=self.entrance_button)
+        self._click_element(locator=self.entrance_button)
 
     def enter_username(self, key: str) -> None:
         """
@@ -39,7 +39,7 @@ class LoginPage(Page):
 
         :param key: the username string
         """
-        self.send_keys_to_element(locator=self.login_label, keys=key)
+        self._send_keys_to_element(locator=self.login_label, keys=key)
 
     def enter_password(self, key: str) -> None:
         """
@@ -47,10 +47,10 @@ class LoginPage(Page):
 
         :param key: the password string
         """
-        self.send_keys_to_element(locator=self.password_label, keys=key)
+        self._send_keys_to_element(locator=self.password_label, keys=key)
 
     def click_submit_button(self) -> None:
         """
         Click the 'submit' button on 'login' page.
         """
-        self.click_element(locator=self.submit_button)
+        self._click_element(locator=self.submit_button)

@@ -41,7 +41,7 @@ class Sidebar(DashboardPage):
 
         :return: A boolean value indicating whether the button is clickable.
         """
-        return self.check_element_enable(self.add_hub_button)
+        return self._check_element_enable(self.add_hub_button)
 
     def settings_button_is_clickable(self) -> bool:
         """
@@ -49,7 +49,7 @@ class Sidebar(DashboardPage):
 
         :return: A boolean value indicating whether the button is clickable.
         """
-        return self.check_element_enable(self.settings_button)
+        return self._check_element_enable(self.settings_button)
 
     def help_button_is_clickable(self) -> bool:
         """
@@ -57,7 +57,7 @@ class Sidebar(DashboardPage):
 
         :return: A boolean value indicating whether the button is clickable.
         """
-        return self.check_element_enable(self.help_button)
+        return self._check_element_enable(self.help_button)
 
     def problem_report_button_is_clickable(self) -> bool:
         """
@@ -65,7 +65,7 @@ class Sidebar(DashboardPage):
 
         :return: A boolean value indicating whether the button is clickable.
         """
-        return self.check_element_enable(self.problem_report_button)
+        return self._check_element_enable(self.problem_report_button)
 
     def video_surveillance_button_is_clickable(self) -> bool:
         """
@@ -73,7 +73,7 @@ class Sidebar(DashboardPage):
 
         :return: A boolean value indicating whether the button is clickable.
         """
-        return self.check_element_enable(self.video_surveillance_button)
+        return self._check_element_enable(self.video_surveillance_button)
 
     def documentation_text_button_is_clickable(self) -> bool:
         """
@@ -81,4 +81,4 @@ class Sidebar(DashboardPage):
 
         :return: A boolean value indicating whether the button is clickable.
         """
-        return self.check_element_enable(self.documentation_text)
+        return self._check_element_enable(self.documentation_text)
