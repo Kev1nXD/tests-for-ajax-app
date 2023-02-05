@@ -13,13 +13,13 @@ class LoginPage(Page):
         entrance_button: str,
     ):
         """
-            LoginPage constructor.
+        LoginPage constructor.
 
-            :param driver: WebDriver instance
-            :param login_label: locator for the login label element
-            :param password_label: locator for the password label element
-            :param submit_button: locator for the submit button element
-            :param entrance_button: locator for the entrance button element
+        :param driver: WebDriver instance
+        :param login_label: locator for the 'login' label element
+        :param password_label: locator for the 'password' label element
+        :param submit_button: locator for the 'submit' button element
+        :param entrance_button: locator for the 'entrance' button element
         """
         super().__init__(driver)
         self.login_label = login_label
@@ -29,28 +29,28 @@ class LoginPage(Page):
 
     def click_entrance_button(self) -> None:
         """
-            Click the entrance button to login page.
+        Click the entrance button to login page.
         """
         self.click_element(locator=self.entrance_button)
 
     def enter_username(self, key: str) -> None:
         """
-            Enter the username on login page.
+        Enter the username on 'login' page.
 
-            :param key: the username string
+        :param key: the username string
         """
         self.send_keys_to_element(locator=self.login_label, keys=key)
 
     def enter_password(self, key: str) -> None:
         """
-            Enter the password on login page.
+        Enter the password on 'login' page.
 
-            :param key: the password string
+        :param key: the password string
         """
         self.send_keys_to_element(locator=self.password_label, keys=key)
 
     def click_submit_button(self) -> None:
         """
-            Click the submit button on login page.
+        Click the 'submit' button on 'login' page.
         """
         self.click_element(locator=self.submit_button)
